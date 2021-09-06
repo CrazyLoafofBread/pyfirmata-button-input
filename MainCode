@@ -1,0 +1,19 @@
+import pyfirmata
+import time
+
+board = pyfirmata.Arduino('COM3')
+
+it = pyfirmata.util.Iterator(board)
+it.start()
+
+led1 = board.get_pin("d:13:o")
+
+button = board.get_pin("d:3:i")
+
+while True:
+    buttonvalue = button.read()
+    if buttonvalue is True:
+        led1.write(1)
+    else:
+        led1.write(0)
+    time.sleep(0.1)
